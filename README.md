@@ -1,3 +1,3 @@
-# windia-project
+# Windia Backend
 
-Monorepo containing frontend and backend for Windia.
+Backend API for Windia project.
