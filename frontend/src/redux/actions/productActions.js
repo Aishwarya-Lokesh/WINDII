@@ -1,4 +1,4 @@
-import axios from '../../utils/axiosConfig';
+import products from '../../products';
 import {
   fetchProductsRequest,
   fetchProductsSuccess,
@@ -11,19 +11,17 @@ import {
 export const fetchProducts = () => async (dispatch) => {
   try {
     dispatch(fetchProductsRequest());
-    const { data } = await axios.get('/products');
+
     dispatch(
       fetchProductsSuccess({
-        products: data.products || data,
-        totalPages: data.pages || 1,
-        currentPage: data.page || 1,
+        products,
+        totalPages: 1,
+        currentPage: 1,
       })
     );
   } catch (error) {
     dispatch(
-      fetchProductsFail(
-        error.response?.data?.message || error.message || 'Failed to load products'
-      )
+      fetchProductsFail(error.message || 'Failed to load products')
     );
   }
 };
@@ -31,13 +29,19 @@ export const fetchProducts = () => async (dispatch) => {
 export const fetchProductDetails = (id) => async (dispatch) => {
   try {
     dispatch(fetchProductRequest());
-    const { data } = await axios.get(`/products/${id}`);
-    dispatch(fetchProductSuccess(data));
+
+    const product = products.find(
+      (item) => item._id.toString() === id.toString()
+    );
+
+    if (!product) {
+      throw new Error('Product not found');
+    }
+
+    dispatch(fetchProductSuccess(product));
   } catch (error) {
     dispatch(
-      fetchProductFail(
-        error.response?.data?.message || error.message || 'Failed to load product'
-      )
+      fetchProductFail(error.message || 'Failed to load product')
     );
   }
 };
