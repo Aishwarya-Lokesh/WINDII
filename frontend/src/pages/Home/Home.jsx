@@ -591,8 +591,7 @@ const Home = () => {
               </div>
               <div className="founder-stats">
                 <div><strong>19+ Years</strong><span>Experience</span></div>
-                <div><strong>₹24 Cr</strong><span>Annual Turnover</span></div>
-                <div><strong>KTech Winner</strong><span>Startup Karnataka</span></div>
+                <div><strong>KTech Elevate Winner</strong><span>Startup Karnataka</span></div>
               </div>
               <div className="founder-badges">
                 <span>DST-iTBI Supported</span>
